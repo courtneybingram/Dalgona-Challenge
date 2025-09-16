@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookie Quiz — Results</title>
+  <style>
+    :root { --bg:#2f2f2f; --card:#0b1220; --text:#e5e7eb; --muted:#9ca3af; --accent:#f59e0b; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background: radial-gradient(1200px 800px at 20% -10%, #1f2937 0%, var(--bg) 60%); color:var(--text); min-height:100vh; display:grid; place-items:center; padding:24px; }
+    .wrap { width:100%; max-width:1000px; display:flex; flex-direction:column; align-items:center; gap:20px; }
+    .bar { width:100%; background:#0a1325; border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 16px; text-align:center; }
+    .panel { width:100%; background:var(--card); border:1px solid rgba(255,255,255,0.10); border-radius:16px; padding:40px; }
+    h2 { margin:0 0 16px; font-size:32px; display:flex; align-items:center; gap:10px; justify-content:center; }
+    .center { text-align:center; }
+    .muted { color:var(--muted); }
+    .btn { margin-top:20px; border:1px solid rgba(255,255,255,0.12); background:linear-gradient(90deg, var(--accent), #f97316); color:#111827; font-weight:700; padding:10px 20px; border-radius:10px; cursor:pointer; font-size:18px; }
+  </style>
+</head>
+<body>
+  <main class="wrap" role="main">
+    <div class="bar" id="summaryBar">Round complete: you scored —/3.</div>
+
+    <section class="panel center" id="panel">
+      <h2><span id="emoji"></span> <span id="title">Perfect!</span></h2>
+      <p><strong>Level:</strong> <span id="level">No Cookie</span></p>
+      <p class="muted" id="subtitle">You're safe this round.</p>
+      <button class="btn" id="nextBtn">End Task</button>
+      <button class="btn" id="resetBtn" style="display:none;">Start Over</button>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_RESULT = "cookie.lastResult";
+    const STORAGE_USED = "cookie.usedIds";
+
+    function readResult(){ try { return JSON.parse(sessionStorage.getItem(STORAGE_RESULT) || "{}"); } catch { return {}; } }
+
+    function render(){
+      const r = readResult();
+      const bar = document.getElementById('summaryBar');
+      const title = document.getElementById('title');
+      const level = document.getElementById('level');
+      const subtitle = document.getElementById('subtitle');
+      const emoji = document.getElementById('emoji');
+      const nextBtn = document.getElementById('nextBtn');
+      const resetBtn = document.getElementById('resetBtn');
+
+      if (r.done){
+        bar.textContent = "All questions have been completed.";
+        title.textContent = "All Done!";
+        level.textContent = "—";
+        subtitle.textContent = "Great job—every question has been used.";
+        emoji.textContent = "✅";
+        nextBtn.style.display = "none";
+        resetBtn.style.display = "inline-block";
+        resetBtn.onclick = () => { sessionStorage.removeItem(STORAGE_USED); window.location.href = "index.html"; };
+        return;
+      }
+
+      bar.textContent = `Round Complete: You Scored ${r.score||0}/${r.total||3}.`;
+      title.textContent = (r.level === "No Cookie") ? "Perfect!" : "Your Dalgona Assignment:";
+      level.textContent = r.level || "—";
+      subtitle.innerHTML = (r.level === "No Cookie")  ? "You're safe this round."
+  : (r.shape ? `<strong>Your shape:</strong> ${r.shape}` : "");
+
+      nextBtn.onclick = () => window.location.href = "welcome.html";
+    }
+
+    document.addEventListener('DOMContentLoaded', render);
+  </script>
+</body>
+</html>
+
