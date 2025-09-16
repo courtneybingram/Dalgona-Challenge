@@ -23,8 +23,11 @@ The Dalgona Challenge is a Squid Game–themed cybersecurity awareness quiz. Pla
 - CSS3 (responsive, custom styles)
 - JavaScript (ES6)
 
-## Project Structure
+## Live Demo
+- https://courtneybingram.github.io/Dalgona-Challenge/
 
+## Credits
+- Created by <b>Courtney Ingram</b> as part of a cybersecurity awareness project.
 
 <br>
 <br>
