@@ -1,173 +1,134 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dalgona Challenge</title>
+  <title>Dalgona Challenge — Welcome</title>
   <style>
-    :root { --bg:#2f2f2f; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#f59e0b; --accent-2:#f97316; --good:#22c55e; --bad:#ef4444; }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background: radial-gradient(1200px 800px at 20% -10%, #1f2937 0%, var(--bg) 60%); color:var(--text); min-height:100vh; display:grid; place-items:center; padding:24px; }
-    .app { width:100%; max-width:1100px; background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:24px; box-shadow:0 20px 60px rgba(0,0,0,0.4); backdrop-filter:blur(6px); min-height:550px; }
-    header { display:flex; align-items:center; gap:12px; margin-bottom:-30px; flex-wrap:wrap; justify-content:space-between; }
-    .logo { height:300px; overflow:hidden; display:flex; justify-content:center; margin-bottom:-40px; }
-    .logo img { height:400px; width:auto; display:block; margin-top:-10px auto 0; }
-    .chip { margin-left:auto; font-size:14px; color:var(--muted); }
-    .sub { font-size:14px; color:var(--muted); margin:6px 0 16px; }
-    .card { background:var(--card); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:20px; }
-    .progress { display:flex; gap:6px; margin-bottom:16px; }
-    .dot { height:8px; width:28px; border-radius:999px; background:#1f2937; border:1px solid rgba(255,255,255,0.08); }
-    .dot.active { background: var(--accent); }
-    .meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-size:14px; color:var(--muted); }
-    .qtext { font-size: clamp(18px,2.4vw,22px); margin:6px 0 14px; line-height: 1.35; }
-    .choices { display:grid; gap:10px; margin:6px 0 4px; }
-    button.choice { text-align:left; width:100%; background:#0b1220; color:var(--text); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 14px; font-size:16px; cursor:pointer; transition: transform .04s ease, border-color .15s ease, background .15s ease; }
-    button.choice:hover { transform: translateY(-1px); }
-    button.choice[disabled] { opacity:.9; cursor:default; }
-    button.choice.correct { border-color: rgba(34,197,94,0.8); background: rgba(34,197,94,0.08); }
-    button.choice.wrong { border-color: rgba(239,68,68,0.8); background: rgba(239,68,68,0.08); }
-    .feedback { min-height:28px; margin-top:8px; font-size:15px; }
-    .feedback.good { color: var(--good); }
-    .feedback.bad { color: var(--bad); }
-    .controls { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:14px; }
-    .btn { border:1px solid rgba(255,255,255,0.12); background:#0b1220; color:var(--text); padding:10px 14px; border-radius:10px; cursor:pointer; font-size:15px; }
-    .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); border: none; color: #111827; font-weight: 700; }
+    :root{
+      --bg:#2f2f2f;
+      --text:#e5e7eb;
+      --muted:#a1a1aa;
+      --pink:#ff2e8c;
+      --pink2:#ff5cab;
+      --card:rgba(255,255,255,.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px 20px;
+    }
+    .shell{
+      width:100%;
+      max-width:1100px;
+      display:grid;
+      gap:0px;
+      grid-template-columns: 1fr;
+    }
+    header{
+      text-align:center;
+    }
+    .logo{
+      height:260px;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      margin-bottom:0px;
+    }
+    .logo img{
+      height:320px;           /* bigger logo */
+      width:auto;
+      display:block;
+      margin-top:-10px;       /* slight crop */
+    }
+    h1{
+      margin:-10px 0  -70px;
+      font-size:clamp(28px,3.6vw,44px);
+      letter-spacing:.4px;
+    }
+     .tagline{
+      color:var(--muted);
+      font-size:clamp(14px,1.8vw,18px);
+    }
+
+    /* Gallery */
+    .gallery{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:16px;
+      padding:16px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap:16px;
+      align-items:center;
+      justify-items:center;
+    }
+    .gallery img{
+      width:220px;            /* make GIFs big */
+      height:auto;
+      display:block;
+      border-radius:12px;
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+
+    /* Start card */
+    .cta{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+      text-align:center;
+    }
+    .btn{
+      background: linear-gradient(90deg, var(--pink), var(--pink2));
+      color:#111827;
+      border:none;
+      padding:14px 28px;
+      font-weight:800;
+      font-size:18px;
+      border-radius:12px;
+      cursor:pointer;
+      letter-spacing:.3px;
+      box-shadow:0 10px 24px rgba(255,46,140,.25);
+      transition: transform .04s ease, filter .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter:saturate(1.1); }
+    .small{ color:var(--muted); font-size:14px; }
   </style>
 </head>
 <body>
-  <div class="logo">
-    <img id="siteLogo" alt="Dalgona Challenge Logo" src="DALGONA_CHALLENGE.png" onerror="this.src='DALGONA%20CHALLENGE.png'">
-  </div>
-  <main class="app" role="main">
-    <header>
-      <div class="chip" id="roundInfo" aria-live="polite"></div>
-    </header>
-    <p class="sub">Answer <strong>exactly 3 questions</strong>. Your score assigns a Dalgona cookie difficulty.</p>
+  <div class="shell">
+    <header><h1>Welcome to the</h1>
+      <div class="logo">
+        <img src="DALGONA_CHALLENGE.png" alt="Dalgona Challenge Logo">
+      </div>
+      </header>
 
-    <section class="card">
-      <div class="progress" aria-hidden="true">
-        <div class="dot" id="dot0"></div>
-        <div class="dot" id="dot1"></div>
-        <div class="dot" id="dot2"></div>
-      </div>
-      <div class="meta">
-        <div id="qCounter">Question 1 of 3</div>
-        <div id="score">Score: 0</div>
-      </div>
-      <div class="qtext" id="qText">Loading…</div>
-      <div class="choices" id="choices" role="group" aria-label="Answer choices"></div>
-      <div class="feedback" id="feedback" aria-live="polite"></div>
-      <div class="controls">
-        <button class="btn" id="skipBtn" title="Skip this question">Skip</button>
-        <button class="btn primary" id="nextBtn" disabled>Next</button>
-      </div>
+    <!-- Graphic collage (safe to remove/reorder without affecting game logic) -->
+    <section class="gallery" aria-label="Intro graphics">
+      <!-- Use whatever files you uploaded; any missing files simply won't render -->
+      <img src="giphy (9).gif" alt="Jacket 456">
+      <img src="giphy (7).gif" alt="guard">
+      <img src="giphy (5).gif" alt="doll glitch">
     </section>
-  </main>
 
-  <!-- Embedded questions -->
-  <script id="embedded-questions" type="application/json">[{"id": "q001", "text": "What should you do first if you think your computer has a virus?", "choices": ["Keep using it", "Disconnect from the internet and tell IT", "Restart it and forget about it", "Ask a friend to check it"], "answerIndex": 1}, {"id": "q002", "text": "What does “incident response” help with?", "choices": ["Fixing slow Wi‑Fi", "Stopping and recovering from cyber problems", "Ordering office supplies", "Choosing strong coffee"], "answerIndex": 1}, {"id": "q003", "text": "What’s the safest way to handle a suspicious email?", "choices": ["Delete it or report it", "Click the link to test it", "Reply to the sender", "Share it with friends"], "answerIndex": 0}, {"id": "q004", "text": "If your phone with work apps gets stolen, what should you do?", "choices": ["Buy a new phone quietly", "Report it so IT can wipe it remotely", "Do nothing unless the thief calls", "Post about it online"], "answerIndex": 1}, {"id": "q005", "text": "Which of these is NOT a security incident?", "choices": ["Clicking a phishing link", "A ransomware screen asking for money", "A coworker forgetting their lunch", "Finding malware on a device"], "answerIndex": 2}, {"id": "q006", "text": "Why do companies have incident response plans?", "choices": ["To punish mistakes", "To respond quickly and reduce damage", "To track vacation days", "To manage passwords"], "answerIndex": 1}, {"id": "q007", "text": "If a coworker asks for your login during an incident, what should you do?", "choices": ["Share it to help", "Refuse and report the request", "Write it on a sticky note", "Email it to them"], "answerIndex": 1}, {"id": "q008", "text": "What’s the safest way to check a suspicious link?", "choices": ["Hover over it to see where it goes", "Click quickly to find out", "Save it for later", "Print it"], "answerIndex": 0}, {"id": "q009", "text": "What should you do if you see someone without a badge in a secure area?", "choices": ["Ignore them", "Politely ask them to badge in or report it", "Share your badge", "Walk away silently"], "answerIndex": 1}, {"id": "q010", "text": "If you get a call asking for your password, what’s the right response?", "choices": ["Give it only if they say they’re from IT", "Refuse and report it", "Text it later", "Share it if they sound nice"], "answerIndex": 1}, {"id": "q011", "text": "What is the “human firewall”?", "choices": ["Employees who report and block threats", "A wall in the server room", "Special antivirus software", "A network cable"], "answerIndex": 0}, {"id": "q012", "text": "When should you report an incident?", "choices": ["Only if it’s really big", "As soon as you notice anything suspicious", "At the end of the month", "Only after your manager approves"], "answerIndex": 1}, {"id": "q013", "text": "What does “containment” mean in incident response?", "choices": ["Cleaning your desk", "Stopping the problem from spreading", "Changing your lunch plans", "Backing up memes"], "answerIndex": 1}, {"id": "q014", "text": "Which is a sign your computer might be compromised?", "choices": ["It runs faster than usual", "Pop‑ups or files you didn’t open", "A clean desktop", "Updated software"], "answerIndex": 1}, {"id": "q015", "text": "Who should handle suspicious files or devices?", "choices": ["Any employee", "The security/IT team", "Social media staff", "No one at all"], "answerIndex": 1}, {"id": "q016", "text": "What is the role of a Security Operations Center (SOC)?", "choices": ["Monitor and respond to cyber threats", "Handle lunch schedules", "Pay bills", "Test video games"], "answerIndex": 0}, {"id": "q017", "text": "What’s the safest way to share incident details?", "choices": ["Through official reporting channels", "On social media", "By texting your friends", "In group chats"], "answerIndex": 0}, {"id": "q018", "text": "Why do companies run incident response drills?", "choices": ["To make people nervous", "To practice and prepare for real attacks", "To test computers", "To check attendance"], "answerIndex": 1}, {"id": "q019", "text": "What should you do if you get ransomware on your screen?", "choices": ["Pay the ransom", "Report it immediately to IT", "Restart and ignore it", "Unplug the monitor only"], "answerIndex": 1}, {"id": "q020", "text": "Which of these should never be shared during an incident?", "choices": ["Your login credentials", "Details with IT/security", "Incident tickets", "Status updates from the SOC"], "answerIndex": 0}, {"id": "q021", "text": "Cybersecurity is only the IT department’s responsibility.", "choices": ["True", "False"], "answerIndex": 1}, {"id": "q022", "text": "Multi-factor authentication helps even if your password is stolen.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q023", "text": "Shoulder surfing is when someone steals your information by looking over your shoulder.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q024", "text": "It’s safe to open email attachments from unknown senders.", "choices": ["True", "False"], "answerIndex": 1}, {"id": "q025", "text": "Physical security (like badges and locked doors) protects digital assets too.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q026", "text": "Incident response helps limit damage after a cyberattack.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q027", "text": "It’s okay to click links in emails if they look urgent and important.", "choices": ["True", "False"], "answerIndex": 1}, {"id": "q028", "text": "Backups should be stored in at least one secure, off-site location.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q029", "text": "SecOps teams only investigate threats once a year.", "choices": ["True", "False"], "answerIndex": 1}, {"id": "q030", "text": "If you suspect a phishing attempt, you should report it immediately.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q031", "text": "What is phishing?", "choices": ["A computer game", "A fake message designed to trick you", "A way to clean your inbox", "A type of firewall"], "answerIndex": 1}, {"id": "q032", "text": "Why is multi-factor authentication (MFA) important?", "choices": ["It makes logging in faster", "It uses two or more ways to prove it’s you", "It remembers your passwords", "It removes the need for updates"], "answerIndex": 1}, {"id": "q033", "text": "What should you do if your device starts acting strangely?", "choices": ["Keep working and ignore it", "Turn up the volume", "Disconnect from the network and report it", "Restart it and never mention it"], "answerIndex": 2}, {"id": "q034", "text": "What’s the best practice when leaving your desk?", "choices": ["Leave your computer unlocked", "Lock your screen", "Log out of the internet completely", "Turn off the monitor only"], "answerIndex": 1}, {"id": "q035", "text": "Which of the following is an example of social engineering?", "choices": ["A hacker installing malware remotely", "An attacker tricking someone into giving a password", "Running an antivirus scan", "Resetting your own password"], "answerIndex": 1}, {"id": "q036", "text": "What is ransomware?", "choices": ["A program that speeds up your computer", "A virus that demands money to unlock files", "A password manager", "An email spam filter"], "answerIndex": 1}, {"id": "q037", "text": "Why should you avoid using public Wi‑Fi for banking?", "choices": ["It drains your phone battery", "It’s slower than home Wi‑Fi", "Hackers can intercept your information", "It uses too much data"], "answerIndex": 2}, {"id": "q038", "text": "What does SecOps (Security Operations) focus on?", "choices": ["Keeping the office clean", "Watching for and responding to cyber threats", "Making passwords easier to remember", "Designing websites"], "answerIndex": 1}, {"id": "q039", "text": "Why is logging important in cybersecurity?", "choices": ["Logs track user activity and help investigate incidents", "Logs make the system run faster", "Logs delete old files automatically", "Logs keep your desktop organized"], "answerIndex": 0}, {"id": "q040", "text": "What’s the safest way to handle a suspicious link in an email?", "choices": ["Hover over it to check where it really goes", "Click it quickly to test", "Forward it to all coworkers", "Save it to your desktop for later"], "answerIndex": 0}, {"id": "q041", "text": "What should you use instead of a short password?", "choices": ["Your birthday", "A passphrase", "“123456”", "Your pet’s name"], "answerIndex": 1}, {"id": "q042", "text": "What should you do before clicking a link in an email?", "choices": ["Forward it to a friend", "Stop, look, and think", "Click quickly before it disappears", "Ignore it completely"], "answerIndex": 1}, {"id": "q043", "text": "If you’re unsure about an email, what’s the safest step?", "choices": ["Reply to the sender", "Call the person using a trusted phone number", "Click the link to check", "Ignore IT rules"], "answerIndex": 1}, {"id": "q044", "text": "Which of these is the best example of a strong password?", "choices": ["Password1", "John1985", "Pizza!Tree#94", "1234abcd"], "answerIndex": 2}, {"id": "q045", "text": "What should you do if you find a USB stick in the parking lot?", "choices": ["Plug it into your work computer", "Take it home and use it", "Report it to IT/security", "Throw it in the trash"], "answerIndex": 2}, {"id": "q046", "text": "Phishing emails often ask you to click links or share personal information.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q047", "text": "It’s okay to share your work password with a trusted coworker.", "choices": ["True", "False"], "answerIndex": 1}, {"id": "q048", "text": "Multi-factor authentication (MFA) makes accounts more secure.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q049", "text": "If someone tailgates you into a secure office area, it’s not a big deal.", "choices": ["True", "False"], "answerIndex": 1}, {"id": "q050", "text": "Security updates are important because they fix weaknesses hackers might use.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q051", "text": "Social engineering is when attackers trick people into giving away information.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q052", "text": "You should back up important files in case of cyberattacks or hardware failures.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q053", "text": "It’s safe to use the same password for work, email, and social media.", "choices": ["True", "False"], "answerIndex": 1}, {"id": "q054", "text": "Incident response is a plan for what to do if a cyberattack happens.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q055", "text": "A Security Operations Center (SOC) is where IT staff monitor for threats.", "choices": ["True", "False"], "answerIndex": 0}, {"id": "q056", "text": "What’s the safest way to handle a suspicious email?", "choices": ["Delete it or report it", "Click the link to test it", "Reply to the sender", "Share it with friends"], "answerIndex": 0}, {"id": "q057", "text": "What’s the best step if you think your computer has malware?", "choices": ["Restart and ignore it", "Ask a coworker for help", "Disconnect from the internet and tell IT", "Install random software"], "answerIndex": 2}, {"id": "q058", "text": "What’s one reason companies train employees on cybersecurity?", "choices": ["To replace IT", "Employees are the first line of defense", "To lower salaries", "To save Wi‑Fi speed"], "answerIndex": 1}, {"id": "q059", "text": "Which is an example of good incident reporting?", "choices": ["Immediately telling IT/security about unusual activity", "Waiting until the end of the month", "Sharing it with coworkers only", "Ignoring it if it seems small"], "answerIndex": 0}, {"id": "q060", "text": "Why should you never delay reporting an incident?", "choices": ["It saves paperwork", "Delays give attackers more time to cause damage", "IT doesn’t care about speed", "Only big incidents matter"], "answerIndex": 1}]</script>
-  <script>window.QUIZ_QUESTIONS = JSON.parse(document.getElementById('embedded-questions').textContent);</script>
-
-  <script>
-    const SHAPES = { easy:["Circle","Square"], medium:["Triangle","Diamond"], hard:["Umbrella","Heart","Star"] };
-    const DALGONA_RULES = { 3:{level:"No Cookie",pool:null}, 2:{level:"Easy",pool:SHAPES.easy}, 1:{level:"Medium",pool:SHAPES.medium}, 0:{level:"Hard",pool:SHAPES.hard} };
-    const ROUND_SIZE = 3;
-    const STORAGE_USED = "cookie.usedIds";
-    const STORAGE_RESULT = "cookie.lastResult";
-
-    let pool = (window.QUIZ_QUESTIONS || []).slice();
-    let score = 0, currentIndex = 0, roundSet = [];
-
-    const qCounterEl = document.getElementById('qCounter');
-    const scoreEl = document.getElementById('score');
-    const qTextEl = document.getElementById('qText');
-    const choicesEl = document.getElementById('choices');
-    const feedbackEl = document.getElementById('feedback');
-    const nextBtn = document.getElementById('nextBtn');
-    const skipBtn = document.getElementById('skipBtn');
-    const dots = [document.getElementById('dot0'), document.getElementById('dot1'), document.getElementById('dot2')];
-    const roundInfoEl = document.getElementById('roundInfo');
-
-    function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
-    function sample(arr){ return arr[Math.floor(Math.random()*arr.length)] }
-
-    function getUsed(){ try { return new Set(JSON.parse(sessionStorage.getItem(STORAGE_USED) || "[]")); } catch { return new Set(); } }
-    function setUsed(set){ sessionStorage.setItem(STORAGE_USED, JSON.stringify(Array.from(set))); }
-
-    function pickRoundSet(){
-      const used = getUsed();
-      const available = pool.filter(q => !used.has(q.id));
-      if (available.length === 0) { sessionStorage.setItem(STORAGE_RESULT, JSON.stringify({done:true})); window.location.href = "results.html"; return []; }
-      shuffle(available);
-      return available.slice(0, ROUND_SIZE);
-    }
-
-    function renderQuestion() {
-      const q = roundSet[currentIndex];
-      const totalThisRound = roundSet.length;
-      qCounterEl.textContent = `Question ${currentIndex+1} of ${totalThisRound}`;
-      scoreEl.textContent = `Score: ${score}`;
-      qTextEl.textContent = q.text;
-      choicesEl.innerHTML = '';
-      feedbackEl.textContent = '';
-      nextBtn.disabled = true;
-      dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
-
-      const optionObjs = q.choices.map((txt, idx) => ({ txt, isCorrect: idx === q.answerIndex }));
-      shuffle(optionObjs);
-      optionObjs.forEach((opt) => {
-        const btn = document.createElement('button');
-        btn.className = 'choice';
-        btn.textContent = opt.txt;
-        btn.dataset.correct = opt.isCorrect ? '1' : '0';
-        btn.addEventListener('click', () => onGuess(btn));
-        choicesEl.appendChild(btn);
-      });
-    }
-
-    function onGuess(btn){
-      const buttons = [...choicesEl.querySelectorAll('button.choice')];
-      buttons.forEach(b => b.disabled = true);
-      const correct = btn.dataset.correct === '1';
-      if (correct) { btn.classList.add('correct'); score++; feedbackEl.textContent = 'Correct!'; feedbackEl.className = 'feedback good'; }
-      else { btn.classList.add('wrong'); const correctBtn = buttons.find(b => b.dataset.correct === '1'); if (correctBtn) correctBtn.classList.add('correct'); feedbackEl.textContent = 'Answer shown above.'; feedbackEl.className = 'feedback bad'; }
-      nextBtn.disabled = false;
-      scoreEl.textContent = `Score: ${score}`;
-      nextBtn.textContent = (currentIndex === roundSet.length - 1) ? 'Finish' : 'Next';
-      nextBtn.onclick = (currentIndex === roundSet.length - 1) ? finishRound : nextQuestion;
-    }
-
-    function nextQuestion(){ currentIndex++; renderQuestion(); }
-
-    function finishRound(){
-      nextBtn.disabled = true; skipBtn.disabled = true;
-      const used = getUsed(); roundSet.forEach(q => used.add(q.id)); setUsed(used);
-      const rule = DALGONA_RULES[score] || DALGONA_RULES[0];
-      const shape = rule.pool ? sample(rule.pool) : null;
-      const allDone = used.size >= pool.length;
-      sessionStorage.setItem(STORAGE_RESULT, JSON.stringify({ score, total: roundSet.length, level: rule.level, shape, done: allDone }));
-      window.location.href = "results.html";
-    }
-
-    function onSkip(){
-      const buttons = [...choicesEl.querySelectorAll('button.choice')];
-      buttons.forEach(b => b.disabled = true);
-      const correctBtn = buttons.find(b => b.dataset.correct === '1'); if (correctBtn) correctBtn.classList.add('correct');
-      feedbackEl.textContent = 'Answer shown above.'; feedbackEl.className = 'feedback'; nextBtn.disabled = false;
-      nextBtn.textContent = (currentIndex === roundSet.length - 1) ? 'Finish' : 'Next';
-      nextBtn.onclick = (currentIndex === roundSet.length - 1) ? finishRound : nextQuestion;
-    }
-
-    function init(){
-      if (!Array.isArray(pool) || pool.length === 0) { document.getElementById('qText').textContent = 'No questions found.'; return; }
-      roundSet = pickRoundSet(); if (roundSet.length === 0) return;
-      currentIndex = 0; score = 0;
-      const usedCount = getUsed().size;
-      roundInfoEl.textContent = `Round ${Math.floor(usedCount / ROUND_SIZE) + 1}`;
-      nextBtn.onclick = nextQuestion; skipBtn.onclick = onSkip;
-      renderQuestion();
-    }
-    document.addEventListener('DOMContentLoaded', init);
-  </script>
+    <section class="cta">
+      <div>Ready?</div>
+      <button class="btn" onclick="location.href='index.html'">Start Game</button>
+      <div class="small">Don't Get Played. Play Smart.</div>
+    </section>
+  </div>
 </body>
 </html>
